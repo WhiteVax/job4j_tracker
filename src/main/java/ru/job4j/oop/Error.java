@@ -29,5 +29,8 @@ public class Error {
 
         Error error404 = new Error(false, 0, "ненайден");
         error404.printInfo();
+
+        Error error101 = new Error();
+        error101.printInfo();
     }
 }
