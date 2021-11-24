@@ -24,7 +24,7 @@ public class PointTest {
     }
 
     @Test
-    public void when1015to56then1029() {
+    public void when1015to56then10dot29() {
         Point a = new Point(10, 15);
         Point b = new Point(5, 6);
         double expected = 10.29;
