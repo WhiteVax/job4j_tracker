@@ -5,9 +5,6 @@ public class Doctor extends Profession {
     private String treatmentPlan;
     private String heal;
 
-    public Doctor() {
-    }
-
     public Doctor(String treatmentPlan, String heal) {
         this.treatmentPlan = treatmentPlan;
         this.heal = heal;
