@@ -1,13 +1,8 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class StartUI extends Item {
-
-    public StartUI(LocalDateTime created) {
-        super(created);
-    }
+public class StartUI  {
 
     public static void main(String[] args) {
 
