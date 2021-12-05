@@ -4,8 +4,8 @@ public class Diagnosis extends Doctor {
 
     private String diagnosis;
 
-    public Diagnosis(String name, String surname, String education, String birtday, String treatmentPlan, String heal, String diagnosis) {
-        super(name, surname, education, birtday, heal, treatmentPlan);
+    public Diagnosis(String name, String surname, String education, String birthday, String treatmentPlan, String heal, String diagnosis) {
+        super(name, surname, education, birthday, heal, treatmentPlan);
         this.diagnosis = this.getDiagnosis();
     }
 
