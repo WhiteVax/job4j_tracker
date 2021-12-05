@@ -4,8 +4,8 @@ public class Surgeon extends Doctor {
 
     private String vaccinate;
 
-    public Surgeon(String name, String surname, String birtday, String treatmentPlan, String vaccinate) {
-        super(name, surname, birtday, treatmentPlan);
+    public Surgeon(String name, String surname, String education, String birtday, String treatmentPlan, String heal, String vaccinate) {
+        super(name, surname, education, birtday, treatmentPlan, heal);
         this.vaccinate = vaccinate;
     }
 

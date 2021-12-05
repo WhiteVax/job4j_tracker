@@ -10,17 +10,11 @@ public class Profession {
 
     private String birthday;
 
-    public Profession() {
-    }
-
     public Profession(String name, String surname, String education, String birthday) {
         this.name = name;
         this.surname = surname;
         this.education = education;
         this.birthday = birthday;
-    }
-
-    public Profession(String name, String surname, String birtday) {
     }
 
     public String getName() {
