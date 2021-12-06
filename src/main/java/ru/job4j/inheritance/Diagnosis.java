@@ -1,12 +1,11 @@
 package ru.job4j.inheritance;
 
-public class Diagnosis extends Doctor {
+public class Diagnosis {
 
     private String diagnosis;
 
-    public Diagnosis(String name, String surname, String education, String birthday, String treatmentPlan, String heal, String diagnosis) {
-        super(name, surname, education, birthday, heal, treatmentPlan);
-        this.diagnosis = this.getDiagnosis();
+    public Diagnosis(String diagnosis) {
+        this.diagnosis = this.diagnosis;
     }
 
     public String getDiagnosis() {
