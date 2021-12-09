@@ -11,17 +11,21 @@ public class Library {
         books[1] = secondBook;
         books[2] = thirdBook;
         books[3] = fourthBook;
+
         for (Book item : books) {
             System.out.println(item.getName() + " : " + item.getNumberOfPages());
         }
+
         System.out.println("");
         Book temp;
         temp = books[3];
         books[3] = books[0];
         books[0] = temp;
+
         for (Book item : books) {
             System.out.println(item.getName() + " : " + item.getNumberOfPages());
         }
+
         System.out.println("");
         for (int index = 0; index < books.length; index++) {
             if ("Clean code".equals(books[index].getName())) {
