@@ -26,25 +26,13 @@ public class StartUI  {
         };
         System.out.println("Menu :");
         for (int i = 0; i < menu.length; i++) {
-            System.out.println(i + ". "+ menu[i]);
+            System.out.println(i + ". " + menu[i]);
         }
     }
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Tracker tracker = new Tracker();
         new StartUI().init(scanner, tracker);
     }
-//    public static void main(String[] args) {
-//
-//        Item time = new Item();
-//
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-//        String currentDateTimeFormat = formatter.format(time.getCreated());
-//        System.out.println(currentDateTimeFormat);
-//
-//        Item item = new Item();
-//        System.out.println(item.toString());
-//    }
 }
