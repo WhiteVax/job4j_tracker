@@ -50,8 +50,6 @@ public class StartUI {
                 }
             } else if (select == 6) {
                 run = false;
-            } else {
-                run = false;
             }
         }
     }
