@@ -13,9 +13,11 @@ public class Matches {
             System.out.println(player + " введите число от 1 до 3:");
             int matches = Integer.parseInt(input.nextLine());
             turn = !turn;
-            if (count > 0) {
+            if ((count - matches) >= 0 && matches > 0 && matches < 4) {
                 count = count - matches;
                 System.out.println(count);
+            } else {
+                System.out.println("Неверное число. Ход переходит следующему игроку");
             }
         }
         if (!turn) {
