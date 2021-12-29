@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
-import java.time.format.DateTimeFormatter;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -96,14 +95,12 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         assertThat(out.toString(), is(
                 "Menu:" + ln
                         + "0. Show all Items." + ln
                         + "1. Exit." + ln
                         + "=== Show all items ===" + ln
-                        + "Item{id=" + one.getId() + ", " + "name="  + "'" + one.getName() + "'"
-                        + ", " + "created=" + one.getCreated().format(formatter) + "}" + ln
+                        + one + ln
                         + "Menu:" + ln
                         + "0. Show all Items." + ln
                         + "1. Exit." + ln
@@ -125,14 +122,12 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         assertThat(out.toString(), is(
                 "Menu:" + ln
                         + "0. Find item by name." + ln
                         + "1. Exit." + ln
                         + "=== Find items by name ===" + ln
-                        + "Item{id=" + one.getId() + ", " + "name="  + "'" + one.getName() + "'"
-                        + ", " + "created=" + one.getCreated().format(formatter) + "}" + ln
+                        + one + ln
                         + "Menu:" + ln
                         + "0. Find item by name." + ln
                         + "1. Exit." + ln
@@ -153,14 +148,12 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         assertThat(out.toString(), is(
                 "Menu:" + ln
                         + "0. Find item by id." + ln
                         + "1. Exit." + ln
                         + "=== Find item by id ===" + ln
-                        + "Item{id=" + one.getId() + ", " + "name="  + "'" + one.getName() + "'"
-                        + ", " + "created=" + one.getCreated().format(formatter) + "}" + ln
+                        + one + ln
                         + "Menu:" + ln
                         + "0. Find item by id." + ln
                         + "1. Exit." + ln
