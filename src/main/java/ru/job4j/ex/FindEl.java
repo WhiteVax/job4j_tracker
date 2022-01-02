@@ -7,17 +7,20 @@ public class FindEl {
             if (value[index].equals(key)) {
                 rsl = index;
                 break;
-            } else {
-                throw new ElementNotFoundException("Element not found.");
             }
         }
-        return rsl;
+        if (rsl == -1) {
+            throw new ElementNotFoundException("Element not found.");
+        } else {
+            return rsl;
+        }
+
     }
 
     public static void main(String[] args) {
         String[] array = {"hi", "hi", "try"};
         try {
-            indexOf(array, "key");
+            indexOf(array, "try");
         } catch (ElementNotFoundException e) {
             e.printStackTrace();
         }
