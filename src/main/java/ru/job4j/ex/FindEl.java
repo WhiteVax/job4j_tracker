@@ -11,16 +11,14 @@ public class FindEl {
         }
         if (rsl == -1) {
             throw new ElementNotFoundException("Element not found.");
-        } else {
-            return rsl;
         }
-
+            return rsl;
     }
 
     public static void main(String[] args) {
         String[] array = {"hi", "hi", "try"};
         try {
-            indexOf(array, "try");
+            indexOf(array, "key");
         } catch (ElementNotFoundException e) {
             e.printStackTrace();
         }
