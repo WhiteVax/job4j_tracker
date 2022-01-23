@@ -2,7 +2,7 @@ package ru.job4j.search;
 
 import java.util.ArrayList;
 import org.junit.Test;
-import org.hamcrest.collection.IsEmptyCollection;
+import static org.junit.Assert.assertTrue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -24,6 +24,6 @@ public class PhoneDictionaryTest {
                 new Person("Vlad", "Sergo", "439582", "Minsk")
         );
         ArrayList<Person> list = phone.find("Petr");
-        assertThat(list, is(IsEmptyCollection.empty()));
+        assertTrue(list.isEmpty());
     }
 }
