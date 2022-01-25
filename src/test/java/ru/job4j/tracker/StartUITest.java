@@ -1,9 +1,10 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 
 public class StartUITest {
     @Test
@@ -18,7 +19,7 @@ public class StartUITest {
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
@@ -54,7 +55,7 @@ public class StartUITest {
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 
-    @Test
+   @Test
     public void whenReplaceItemTestOutputIsSuccessfully() {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
