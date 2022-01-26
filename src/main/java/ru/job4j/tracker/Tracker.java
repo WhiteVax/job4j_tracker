@@ -39,7 +39,8 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        return indexOf(id) != -1 ? items.get(indexOf(id)) : null;
+        int index = indexOf(id);
+        return index != -1 ? items.get(index) : null;
     }
 
       public boolean replace(int id, Item item) {
