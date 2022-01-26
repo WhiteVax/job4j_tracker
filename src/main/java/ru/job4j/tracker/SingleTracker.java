@@ -1,10 +1,12 @@
 package ru.job4j.tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SingleTracker {
     private Tracker tracker = new Tracker();
     private static SingleTracker instance = null;
+    private final List<Item> items = new ArrayList<>();
 
     private SingleTracker() {
     }
@@ -24,12 +26,12 @@ public class SingleTracker {
         return tracker.findById(id);
     }
 
-    public ArrayList<Item> findByName(String name) {
+    public List<Item> findByName(String name) {
         return tracker.findByName(name);
     }
 
-    public ArrayList<Item> findByAllItems() {
-        return tracker.findAll();
+    public List<Item> findByAllItems() {
+        return List.copyOf(items);
     }
 
     public boolean editItem(int id, Item item) {

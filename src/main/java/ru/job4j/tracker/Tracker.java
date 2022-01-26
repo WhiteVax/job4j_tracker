@@ -13,12 +13,12 @@ public class Tracker {
         return item;
     }
 
-    public ArrayList<Item> findAll() {
-        return new ArrayList<>(items);
+    public List<Item> findAll() {
+        return List.copyOf(items);
     }
 
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> rsl = new ArrayList<>();
+    public List<Item> findByName(String key) {
+        List<Item> rsl = new ArrayList<>();
         for (Item item : items) {
             if (item.getName().contains(key)) {
                 rsl.add(item);
@@ -39,22 +39,28 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        Item rsl = null;
-        for (Item item: items) {
-            if (item.getId() == id) {
-                rsl = item;
-                break;
-            }
-        }
-        return rsl;
+//        Item rsl;
+//        rsl = indexOf(id) != -1 ? items.get(indexOf(id)) : null;
+        return indexOf(id) != -1 ? items.get(indexOf(id)) : null;
     }
+
+//    public Item findById(int id) {
+//        Item rsl = null;
+//        for (Item item: items) {
+//            if (item.getId() == id) {
+//                rsl = item;
+//                break;
+//            }
+//        }
+//        return rsl;
+//    }
 
       public boolean replace(int id, Item item) {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            items.set(index, item);
             item.setId(id);
+            items.set(index, item);
         }
         return rsl;
       }
