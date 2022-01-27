@@ -13,7 +13,10 @@ public class UniqueText {
             check.add(cell);
         }
         for (String duplicated : text) {
-            rsl = check.contains(duplicated) && rsl;
+            if (!check.contains(duplicated)) {
+                rsl = false;
+                break;
+            }
         }
         return rsl;
     }
