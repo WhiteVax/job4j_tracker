@@ -3,7 +3,6 @@ package ru.job4j.collection;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,16 @@ public class OrderConvertTest {
     public void whenSingleOrder() {
         List<Order> orders = new ArrayList<>();
         orders.add(new Order("3sfe", "Dress"));
+        Map<String, Order> map = OrderConvert.process(orders);
+        assertThat(map.get("3sfe"), is(new Order("3sfe", "Dress")));
+    }
+
+    @Test
+    public void whenHaveDuplicate() {
+        List<Order> orders = List.of(
+                new Order("3sfe", "Dress"),
+                new Order("3sfe", "Dress"),
+                new Order("3sfe", "Dress"));
         Map<String, Order> map = OrderConvert.process(orders);
         assertThat(map.get("3sfe"), is(new Order("3sfe", "Dress")));
     }
