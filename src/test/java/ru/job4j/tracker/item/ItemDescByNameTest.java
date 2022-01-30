@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.is;
 public class ItemDescByNameTest {
 
     @Test
-    public void sortByName() {
+    public void sortDescByName() {
         List<Item> items = new ArrayList<>(List.of(
                 new Item("Arsen", 3),
                 new Item("Dmitry", 2),
