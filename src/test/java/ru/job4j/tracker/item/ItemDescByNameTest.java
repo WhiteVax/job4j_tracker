@@ -3,6 +3,7 @@ package ru.job4j.tracker.item;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import ru.job4j.tracker.Item;
 
@@ -18,7 +19,7 @@ public class ItemDescByNameTest {
                 new Item("Dmitry", 2),
                 new Item("Yuri", 1)
         ));
-        items.sort(new ItemDescByName());
+        Collections.sort(items, new ItemDescByName());
         List<Item> expect = new ArrayList<>(List.of(
                 new Item("Yuri", 1),
                 new Item("Dmitry", 2),
