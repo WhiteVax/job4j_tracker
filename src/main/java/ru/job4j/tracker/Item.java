@@ -72,7 +72,7 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return getId() == item.getId() && getName().equals(item.getName()) ;
+        return getId() == item.getId() && getName().equals(item.getName());
     }
 
     @Override
