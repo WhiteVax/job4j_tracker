@@ -72,11 +72,11 @@ public class Item {
             return false;
         }
         Item item = (Item) o;
-        return getId() == item.getId() && getName().equals(item.getName()) && Objects.equals(getCreated(), item.getCreated());
+        return getId() == item.getId() && getName().equals(item.getName()) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCreated());
+        return Objects.hash(getId(), getName());
     }
 }
