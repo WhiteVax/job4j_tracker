@@ -5,13 +5,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс описывает, работу упрощенного банквоского сервиса,
+ * с возможностью, хранения, добавления, удаления пользователей,
+ * переводом средств между пользователями.
+ * @author VLADYSLAV BEDENKO
+ * @version 1.0
+ */
 public class BankService {
+    /**
+     * Хранение пользователей осуществляется в коллекции типа HashMap.
+     */
     private final Map<User, List<Account>> users = new HashMap<>();
 
+    /**
+     * Метод добавляет пользователя, если его не находит по ключу в users.
+     * @param user пользователь который добавляется.
+     */
     public void addUser(User user) {
         users.putIfAbsent(user, new ArrayList<>());
     }
 
+    /**
+     * Метод добавляет акаунт пользователю.
+     * @param passport паспорстные данные по которым ищет пользователя
+     *                 в users.
+     * @param account акаунт который проверяется в списке,
+     *                если не находит то добавляет.
+     */
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
         if (user != null) {
@@ -22,6 +43,12 @@ public class BankService {
         }
     }
 
+    /**
+     * Метод ищет пользователя по паспортным данным в users.
+     * @param passport данные по которым ищет.
+     * @return возвращает найденного пользователя типа User,
+     * если не находит вернёт null.
+     */
     public User findByPassport(String passport) {
         User user = null;
         for (User item : users.keySet()) {
@@ -33,6 +60,12 @@ public class BankService {
         return user;
     }
 
+    /**
+     * Метод ищет реквизиты пользователя.
+     * @param passport данные по которым ищет пользователя.
+     * @param requisite реквизиты которые ищет.
+     * @return возвращает найденный акаунт или null  случае неудачи.
+     */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
         Account found = null;
@@ -48,6 +81,12 @@ public class BankService {
         return found;
     }
 
+    /**
+     * Метод удаляет пользователя.
+     * @param passport данные по которым находит пользователя
+     *                 для удаления.
+     * @return в случае выполнения вернёт true или false.
+     */
     public boolean deleteUser(String passport) {
         boolean rsl = false;
         User user = findByPassport(passport);
@@ -58,6 +97,15 @@ public class BankService {
         return rsl;
     }
 
+    /**
+     * Метод для перевода денежных средств.
+     * @param srcPassport данные по которым ищет пользователя.
+     * @param srcRequisite реквизиты с которых будет осуществлятся перевод.
+     * @param destPassport данные по которым ищет пользователя для перевода.
+     * @param destRequisite реквизиты на которые будет осуществлятся перевод.
+     * @param amount сумма перевода.
+     * @return в случаи выполнения вернёт true или false
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
