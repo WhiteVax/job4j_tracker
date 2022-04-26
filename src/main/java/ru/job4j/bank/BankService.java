@@ -1,9 +1,6 @@
 package ru.job4j.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Класс описывает, работу упрощенного банковского сервиса,
@@ -50,14 +47,11 @@ public class BankService {
      * если не находит вернёт null.
      */
     public User findByPassport(String passport) {
-        User user = null;
-        for (User item : users.keySet()) {
-            if (item.getPassport().equals(passport)) {
-                user = item;
-                break;
-            }
-        }
-        return user;
+        return users.keySet()
+                .stream()
+                .filter(u -> u.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -68,17 +62,14 @@ public class BankService {
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
-        Account found = null;
         if (user != null) {
-            List<Account> rsl = users.get(user);
-            for (Account account : rsl) {
-                if (account.getRequisite().equals(requisite)) {
-                    found = account;
-                    break;
-                }
-            }
+            return users.get(user)
+                    .stream()
+                    .filter(a -> a.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
-        return found;
+        return null;
     }
 
     /**
