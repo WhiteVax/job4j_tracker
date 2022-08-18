@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SingleTracker {
-    private Tracker tracker = new Tracker();
+    private MemTracker memTracker = new MemTracker();
     private static SingleTracker instance = null;
     private final List<Item> items = new ArrayList<>();
 
@@ -19,15 +19,15 @@ public class SingleTracker {
     }
 
     public Item add(Item item) {
-        return tracker.add(item);
+        return memTracker.add(item);
     }
 
     public Item findById(int id) {
-        return tracker.findById(id);
+        return memTracker.findById(id);
     }
 
     public List<Item> findByName(String name) {
-        return tracker.findByName(name);
+        return memTracker.findByName(name);
     }
 
     public List<Item> findByAllItems() {
@@ -35,10 +35,10 @@ public class SingleTracker {
     }
 
     public boolean editItem(int id, Item item) {
-        return tracker.replace(id, item);
+        return memTracker.replace(id, item);
     }
 
     public boolean deleteItem(int id) {
-        return tracker.delete(id);
+        return memTracker.delete(id);
     }
 }
