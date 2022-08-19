@@ -10,6 +10,13 @@ public class SqlTracker implements Store, AutoCloseable {
 
     private Connection connection;
 
+    public SqlTracker(Connection connection) {
+        this.connection = connection;
+    }
+
+    public SqlTracker() {
+    }
+
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             var config = new Properties();
@@ -39,12 +46,16 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public Item add(Item item) {
         try (var statement = connection.prepareStatement(
-                "INSERT INTO items(name, created) VALUES (?, ?) RETURNING id")) {
+                "INSERT INTO items(name, created) VALUES (?, ?);",
+                Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
             statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
-            var set = statement.executeQuery();
-            set.next();
-            item.setId(set.getInt(1));
+            statement.execute();
+            try (var id = statement.getGeneratedKeys()) {
+                if (id.next()) {
+                    item.setId(id.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

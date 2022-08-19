@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS items(
+CREATE TABLE IF NOT EXISTS items (
     id SERIAL PRIMARY KEY,
     name TEXT,
     created TIMESTAMP
