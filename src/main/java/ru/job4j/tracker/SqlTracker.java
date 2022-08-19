@@ -114,7 +114,7 @@ public class SqlTracker implements Store, AutoCloseable {
         try (var statement = connection.prepareStatement("SELECT * FROM items WHERE id = ?")) {
             statement.setInt(1, id);
             var set = statement.executeQuery();
-            if(set.next()) {
+            if (set.next()) {
                 item = (getItem(set));
             }
         } catch (SQLException e) {
