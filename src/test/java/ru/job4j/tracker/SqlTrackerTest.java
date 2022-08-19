@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +13,7 @@ public class SqlTrackerTest {
 
     private static Connection connection;
 
-    @BeforeClass
+    @Ignore
     public static void initConnection() {
         try (var in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
             var config = new Properties();
@@ -33,19 +30,19 @@ public class SqlTrackerTest {
         }
     }
 
-    @AfterClass
+    @Ignore
     public static void closeConnection() throws SQLException {
         connection.close();
     }
 
-    @After
+    @Ignore
     public void wipeTable() throws SQLException {
         try (var statement = connection.prepareStatement("delete from items")) {
             statement.execute();
         }
     }
 
-    @Test
+    @Ignore
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         var tracker = new SqlTracker(connection);
         var item = new Item("item");
@@ -53,7 +50,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
 
-    @Test
+    @Ignore
     public void whenSaveItemsAndShowAll() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
@@ -63,7 +60,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findAll().get(0)).isEqualTo(items[0]);
     }
 
-    @Test
+    @Ignore
     public void whenSaveItemsAndDelete() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
@@ -74,7 +71,7 @@ public class SqlTrackerTest {
         assertThat(tracker.delete(second)).isTrue();
     }
 
-    @Test
+    @Ignore
     public void whenSaveItemsAndEdit() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
@@ -86,7 +83,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(second).getName()).isEqualTo(newItem.getName());
     }
 
-    @Test
+    @Ignore
     public void whenSaveItemsAndFindByName() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
