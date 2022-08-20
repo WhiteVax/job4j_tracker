@@ -1,7 +1,10 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.store;
 
 import org.junit.*;
+import ru.job4j.tracker.Item;
+import ru.job4j.tracker.SqlTracker;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,9 +16,9 @@ public class SqlTrackerTest {
 
     private static Connection connection;
 
-    @Ignore
+    @BeforeClass
     public static void initConnection() {
-        try (var in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
+        try (var in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("./db/liquibase.properties")) {
             var config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -30,19 +33,19 @@ public class SqlTrackerTest {
         }
     }
 
-    @Ignore
+    @AfterClass
     public static void closeConnection() throws SQLException {
         connection.close();
     }
 
-    @Ignore
+    @After
     public void wipeTable() throws SQLException {
         try (var statement = connection.prepareStatement("delete from items")) {
             statement.execute();
         }
     }
 
-    @Ignore
+    @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         var tracker = new SqlTracker(connection);
         var item = new Item("item");
@@ -50,17 +53,17 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
 
-    @Ignore
+    @Test
     public void whenSaveItemsAndShowAll() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
-                       new Item("desktop")};
+                new Item("desktop")};
         tracker.add(items[0]);
         tracker.add(items[1]);
         assertThat(tracker.findAll().get(0)).isEqualTo(items[0]);
     }
 
-    @Ignore
+    @Test
     public void whenSaveItemsAndDelete() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
@@ -71,7 +74,7 @@ public class SqlTrackerTest {
         assertThat(tracker.delete(second)).isTrue();
     }
 
-    @Ignore
+    @Test
     public void whenSaveItemsAndEdit() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
@@ -83,7 +86,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(second).getName()).isEqualTo(newItem.getName());
     }
 
-    @Ignore
+    @Test
     public void whenSaveItemsAndFindByName() {
         var tracker = new SqlTracker(connection);
         Item[] items = {new Item("laptop"),
@@ -95,6 +98,3 @@ public class SqlTrackerTest {
         assertThat(tracker.findByName("desktop").get(1).getName()).isEqualTo(items[2].getName());
     }
 }
-
-
-
