@@ -16,21 +16,21 @@
     </properties>
 
     <profiles>
-            <profile>
-                <id>test</id>
-                <properties>
-                    <liquibase.config>db/liquibase_test.properties</liquibase.config>
-                </properties>
-                <activation>
-                    <activeByDefault>true</activeByDefault>
-                </activation>
-            </profile>
-            <profile>
-                <id>production</id>
-                <properties>
-                    <liquibase.config>db/liquibase.properties</liquibase.config>
-                </properties>
-            </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <liquibase.config>db/liquibase_test.properties</liquibase.config>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <liquibase.config>db/liquibase.properties</liquibase.config>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -64,13 +64,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.6</version>
+            <version>42.4.2</version>
         </dependency>
 
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.214</version>
+            <version>1.4.200</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -126,7 +126,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -150,7 +150,6 @@
                 <version>4.15.0</version>
                 <configuration>
                     <propertyFile>${liquibase.config}</propertyFile>
-                    <changeLogFile>db/dbchangelog.xml</changeLogFile>
                 </configuration>
                 <executions>
                     <execution>
