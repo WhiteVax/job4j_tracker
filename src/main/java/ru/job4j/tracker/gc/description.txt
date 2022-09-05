@@ -1,0 +1,21 @@
+-XX:+UseSerialGC -Xmx1000m -Xms1000m -Xlog:gc:log.txt.
+Добавление, просмотр всех заявок, удаление - 10000 
+
+-jconsole
+GC time: 53.272 seconds on Copy (982 collections)
+8 minutes on MarkSweepCompact (904 collections)
+загруженную область памяти Heap Max 989 mb
+Total classes loaded:2,817
+
+-jmap -histo pid 
+Создание в большом кол-ве:
+-объектов LocalDataTime, Localdate, LocalTime;
+-объектов item;
+-объектов string;
+-общим кол-вом объектов.
+
+-jstat -gc pid 1s 20
+Заполненные области памяти GC eden old, с редким заполненеим Survivor
+
+При уменьшении Heap до 500mb, быструю загрузку памяти с ошибкой OutOfMemoryError
+SerialGC спустя 3 секунд вылетел. 

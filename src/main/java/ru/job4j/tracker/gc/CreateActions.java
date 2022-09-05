@@ -1,0 +1,30 @@
+package ru.job4j.tracker.gc;
+
+import ru.job4j.tracker.*;
+
+public class CreateActions implements UserAction {
+    private final Output out;
+
+    public CreateActions(Output out) {
+        this.out = out;
+    }
+
+    @Override
+    public String name() {
+        return "Add new Item.";
+    }
+
+    @Override
+    public boolean execute(Input input, Store store) {
+        out.println("=== Create a new Item ===");
+        String name = input.askStr("Enter name: ");
+        var count = input.askInt("count");
+        for (int i = 0; i < count; i++) {
+            var item = new Item(name, i);
+            store.add(item);
+            store.findAll();
+            store.delete(i);
+        }
+        return true;
+    }
+}
