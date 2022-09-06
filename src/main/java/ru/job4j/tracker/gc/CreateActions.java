@@ -20,10 +20,8 @@ public class CreateActions implements UserAction {
         String name = input.askStr("Enter name: ");
         var count = input.askInt("count");
         for (int i = 0; i < count; i++) {
-            var item = new Item(name, i);
+            var item = new Item(name);
             store.add(item);
-            store.findAll();
-            store.delete(i);
         }
         return true;
     }

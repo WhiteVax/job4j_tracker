@@ -37,12 +37,12 @@ public class Start {
             var output = new ConsoleOutput();
             var input = new ValidateInput(output, new ConsoleInput());
             var tracker = new SqlTracker();
-                tracker.init();
+            tracker.init();
                 List<UserAction> actions = List.of(
                         new CreateActions(output),
                         new ShowAllAction(output),
                         new EditAction(output),
-                        new DeleteAction(output),
+                        new DeleteActions(output),
                         new FindActionById(output),
                         new FindActionByName(output),
                         new ExitAction(output)
