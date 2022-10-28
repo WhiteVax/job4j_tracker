@@ -7,6 +7,9 @@ import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MemTrackerTest {
     @Test
@@ -89,5 +92,80 @@ public class MemTrackerTest {
         int id = bug.getId();
         memTracker.delete(id);
         assertThat(memTracker.findById(id), is(nullValue()));
+    }
+
+    @Test
+    public void whenExecuteEdit() {
+        var out = new StubOutput();
+        var tracker = new MemTracker();
+        tracker.add(new Item("Replaced item"));
+        var replacedName = "New item name";
+        var rep = new EditAction(out);
+
+        var input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+        when(input.askStr(any(String.class))).thenReturn(replacedName);
+
+        rep.execute(input, tracker);
+
+        var ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Edit item ===" + ln + "Заявка изменена успешно."
+                + ln));
+        assertThat(tracker.findAll().get(0).getName(), is(replacedName));
+    }
+
+    @Test
+    public void whenDeleteAction() {
+        var out = new StubOutput();
+        var tracker = new MemTracker();
+        tracker.add(new Item("New item"));
+        var deleteAction = "=== Delete item ===";
+        var rep = new DeleteAction(out);
+
+        var input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+        when(input.askStr(any(String.class))).thenReturn(deleteAction);
+
+        rep.execute(input, tracker);
+        var ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Delete item ===" + ln + "Заявка удалена успешно."
+                + ln));
+    }
+
+    @Test
+    public void whenFindById() {
+        var out = new StubOutput();
+        var tracker = new MemTracker();
+        var item = new Item("New item");
+        tracker.add(item);
+        var byId = new FindActionById(out);
+
+        var input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+
+        byId.execute(input, tracker);
+        var ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Find item by id ===" + ln + item + ln));
+    }
+
+    @Test
+    public void whenFindByName() {
+        var out = new StubOutput();
+        var tracker = new MemTracker();
+        var item = new Item("Desktop");
+        tracker.add(item);
+        var byName = new FindActionByName(out);
+
+        var input = mock(Input.class);
+
+        when(input.askInt(any(String.class))).thenReturn(1);
+        when(input.askStr(any(String.class))).thenReturn("Desktop");
+
+        byName.execute(input, tracker);
+        var ln = System.lineSeparator();
+        assertThat(out.toString(), is("=== Find items by name ===" + ln + item + ln));
     }
 }
