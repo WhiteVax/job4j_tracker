@@ -29,7 +29,7 @@ public class HbmTracker implements Store, AutoCloseable {
         int rsl = 0;
         try {
             session.beginTransaction();
-            rsl = session.createQuery("UPDATE Item i SET i.name = :fName, i.created = :fCreated WHERE i.id = :fId", Item.class)
+            rsl = session.createQuery("UPDATE Item i SET i.name = :fName, i.created = :fCreated WHERE i.id = :fId")
                     .setParameter("fName", item.getName())
                     .setParameter("fCreated", item.getCreated())
                     .setParameter("fId", id)
@@ -47,7 +47,7 @@ public class HbmTracker implements Store, AutoCloseable {
         var rsl = 0;
         try {
             session.beginTransaction();
-            rsl = session.createQuery("DELETE Item i WHERE i.id = :fId", Item.class)
+            rsl = session.createQuery("DELETE Item i WHERE i.id = :fId")
                     .setParameter("fId", id)
                     .executeUpdate();
             session.getTransaction().commit();
