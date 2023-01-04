@@ -6,7 +6,6 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.util.List;
-import java.util.Optional;
 
 public class HbmTracker implements Store, AutoCloseable {
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
@@ -18,7 +17,7 @@ public class HbmTracker implements Store, AutoCloseable {
     public Item add(Item item) {
         var session = sf.openSession();
         session.beginTransaction();
-        session.saveOrUpdate(item);
+        session.save(item);
         session.getTransaction().commit();
         session.close();
         return item;
@@ -35,7 +34,7 @@ public class HbmTracker implements Store, AutoCloseable {
                     .setParameter("fCreated", item.getCreated())
                     .setParameter("fId", id)
                     .executeUpdate();
-            session.beginTransaction().commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
             session.beginTransaction().rollback();
         }
@@ -51,9 +50,9 @@ public class HbmTracker implements Store, AutoCloseable {
             rsl = session.createQuery("DELETE Item i WHERE i.id = :fId", Item.class)
                     .setParameter("fId", id)
                     .executeUpdate();
-            session.beginTransaction().commit();
+            session.getTransaction().commit();
         } catch (Exception e) {
-            session.beginTransaction().rollback();
+            session.getTransaction().rollback();
         }
         return rsl != 0;
     }
@@ -64,7 +63,7 @@ public class HbmTracker implements Store, AutoCloseable {
         session.beginTransaction();
         List<Item> items =
                 session.createQuery("FROM Item i ORDER BY i.id", Item.class).list();
-        session.beginTransaction().commit();
+        session.getTransaction().commit();
         session.close();
         return items;
     }
@@ -76,7 +75,7 @@ public class HbmTracker implements Store, AutoCloseable {
         List<Item> items = session.createQuery(
                 "FROM Item i WHERE i.name = :fName ORDER BY i.id", Item.class)
                 .setParameter("fName", key).list();
-        session.beginTransaction().commit();
+        session.getTransaction().commit();
         session.close();
         return items;
     }
@@ -89,7 +88,7 @@ public class HbmTracker implements Store, AutoCloseable {
                 .setParameter("fId", id)
                 .uniqueResultOptional()
                 .orElse(new Item());
-        session.beginTransaction().commit();
+        session.getTransaction().commit();
         session.close();
         return item;
     }
