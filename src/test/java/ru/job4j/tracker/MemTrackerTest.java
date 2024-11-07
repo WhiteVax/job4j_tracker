@@ -1,6 +1,12 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+import ru.job4j.tracker.action.DeleteAction;
+import ru.job4j.tracker.action.EditAction;
+import ru.job4j.tracker.action.FindActionById;
+import ru.job4j.tracker.action.FindActionByName;
+import ru.job4j.tracker.input.Input;
+import ru.job4j.tracker.output.StubOutput;
 
 import java.util.List;
 
